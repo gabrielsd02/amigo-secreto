@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useListaParticipantes } from "../../state/hook/useListaParticipantes";
 import { useResultadoSorteio } from "../../state/hook/useResultadoSorteio";
@@ -19,6 +19,15 @@ const Sorteio = () => {
             setAmigoSecreto(resultado.get(participanteAtual)!);
         }
     }
+    
+    useEffect(() => {
+        if(amigoSecreto) {
+            // após 5 segundos, remove o participante
+            setTimeout(() => {
+                setAmigoSecreto('');
+            }, 5000);
+        }
+    }, [amigoSecreto])
 
     return (
         <Card>
